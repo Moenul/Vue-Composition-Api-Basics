@@ -1,4 +1,9 @@
 <template>
+  <div class="user-data">
+    {{ userData.name }}
+    <span>@{{ userData.username }}</span>
+    {{ userInfo.profession }}
+  </div>
   <header>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
@@ -11,10 +16,40 @@
     </div>
   </header>
 
-  <RouterView />
+  <RouterView :userData="userData" />
 </template>
 
+
+<script setup>
+import { reactive, provide } from 'vue';
+
+
+const userData = reactive({
+  name: 'Moenul',
+  username: 'moenul22'
+})
+
+const userInfo = reactive({
+  profession: 'Web Design',
+})
+
+provide('userInfo', userInfo)
+
+</script>
+
 <style scoped>
+.user-data{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: lightblue;
+  font-size: 14px;
+  padding: 5px;
+}
+.user-data span{
+  color: gray;
+  font-size: 12px;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;
