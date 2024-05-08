@@ -1,8 +1,11 @@
 <template>
   <div class="user-data">
-    {{ userData.name }}
-    <span>@{{ userData.username }}</span>
+    {{ userData.name }} | Network Status: <span class="netStatus" :style="{ color : online ? 'darkgreen' : 'darkred'}">{{ online ? 'Online' : 'Offline' }}</span>
+    <div class="user-detail">
+      Username: @{{ userData.username }} |
     {{ userInfo.profession }}
+    </div>
+    
   </div>
   <header>
     <div class="wrapper">
@@ -22,6 +25,7 @@
 
 <script setup>
 import { reactive, provide } from 'vue';
+import { useOnline } from '@vueuse/core'
 
 
 const userData = reactive({
@@ -35,6 +39,11 @@ const userInfo = reactive({
 
 provide('userInfo', userInfo)
 
+// Online Status
+
+const online = useOnline()
+
+
 </script>
 
 <style scoped>
@@ -46,9 +55,13 @@ provide('userInfo', userInfo)
   font-size: 14px;
   padding: 5px;
 }
-.user-data span{
-  color: gray;
+.user-data .netStatus{
+  font-weight: bold;
+}
+
+.user-detail{
   font-size: 12px;
+  color: rgb(87, 87, 87);
 }
 header {
   line-height: 1.5;
