@@ -13,7 +13,7 @@
     <textarea v-autofocus cols="130" rows="10"></textarea>
 
     <div>
-      <button @click="increaseCounter(1)" class="counter-btn" :class="{ 'yellow' : oddOrEven === 'Odd'}">{{ counterData.count }}</button>
+      <button @click="counter.increaseCounter(1)" class="counter-btn" :class="{ 'yellow' : counter.oddOrEven === 'Odd'}">{{ counter.count }}</button>
     </div>
   </div>
 </template>
@@ -22,11 +22,14 @@
 // Imports
 import { ref } from 'vue'
 import { vAutofocus } from '@/directives/vAutofocus'
-import { useCounter } from '@/use/useCounter'
+// import { useCounter } from '@/use/useCounter'
+import { useCounterStore } from '@/stores/counter'
 
 
 // Counter
-const { counterData, oddOrEven, increaseCounter, decreaseCounter } = useCounter()
+// const { counterData, oddOrEven, increaseCounter, decreaseCounter } = useCounter()
+
+const counter = useCounterStore();
 
 // Counter
 
